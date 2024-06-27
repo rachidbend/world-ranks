@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import CountriesHeader from './CountriesHeader';
 import CountriesList from './CountriesList';
+import Filters from './Filters';
 
 const StyledCountriesView = styled.div`
   padding: 3.2rem;
@@ -13,6 +14,14 @@ const StyledCountriesView = styled.div`
   border-radius: 1.2rem;
 `;
 
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 20rem 1fr;
+  justify-content: start;
+  align-items: start;
+  gap: 3.2rem;
+`;
+
 function CountriesView() {
   return (
     <StyledCountriesView>
@@ -21,10 +30,12 @@ function CountriesView() {
       {/* search box */}
 
       {/* MAIN */}
-      {/* Filters and Sorting */}
-
-      {/* countries list */}
-      <CountriesList />
+      <Container>
+        {/* Filters and Sorting */}
+        <Filters />
+        {/* countries list */}
+        <CountriesList />
+      </Container>
     </StyledCountriesView>
   );
 }
