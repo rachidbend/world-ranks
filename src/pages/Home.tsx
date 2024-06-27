@@ -1,10 +1,23 @@
+import styled from 'styled-components';
+import BackgroundImage from '../UI/BackgroundImage';
+import CountriesView from '../UI/CountriesView';
+
+const StyledHome = styled.div`
+  height: 100vh;
+  height: 100svh;
+
+  background-color: var(--color-grey-100);
+`;
+
 function Home() {
   return (
-    <div>
+    <StyledHome>
       {/* background image */}
-      {/* background component */}
+      <BackgroundImage />
+
       {/* app component */}
-    </div>
+      <CountriesView />
+    </StyledHome>
   );
 }
 
