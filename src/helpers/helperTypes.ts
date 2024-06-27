@@ -1,4 +1,4 @@
-type Contry = {
+export type Contry = {
   name: {
     common: string;
     official: string;

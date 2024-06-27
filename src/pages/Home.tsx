@@ -1,17 +1,23 @@
-import useGetAllCountries from '../hooks/useGetAllCountries';
+import styled from 'styled-components';
+import BackgroundImage from '../UI/BackgroundImage';
+import CountriesView from '../UI/CountriesView';
+
+const StyledHome = styled.div`
+  height: 100vh;
+  height: 100svh;
+
+  background-color: var(--color-grey-100);
+`;
 
 function Home() {
-  // const { allCountries, isError, isLoading } = useGetAllCountries();
-
-  // if (isLoading) return <p>loading...</p>;
-  // if (isError) return <p>there was an error</p>;
-
   return (
-    <div>
+    <StyledHome>
       {/* background image */}
-      {/* background component */}
+      <BackgroundImage />
+
       {/* app component */}
-    </div>
+      <CountriesView />
+    </StyledHome>
   );
 }
 
