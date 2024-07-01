@@ -42,7 +42,7 @@ function CountriesList() {
           ?.map(country => (
             <CountryItem country={country} key={country.name.official} />
           ))
-          .slice(1, 10)}
+          .slice(0, 10)}
       </List>
     </StyledCountriesList>
   );
