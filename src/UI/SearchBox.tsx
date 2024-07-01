@@ -22,6 +22,7 @@ function SearchBox() {
         type="text"
         onChange={handleChange}
         value={searchQuery}
+        placeholder="Search by Name, Region, Subregion"
       />
     </StyledSearchBox>
   );

@@ -28,17 +28,39 @@ const CountriesContext = createContext<CountriesContextType | undefined>(
 function CountriesProvider({ children }: CountriesProps) {
   const { allCountries, isError, isLoading } = useGetAllCountries();
 
-  const [filteredResults, setFilteredResults] = useState([]);
+  const initialState: Countries = [];
+  const [filteredResults, setFilteredResults] =
+    useState<Countries>(initialState);
 
   const numOfResults = allCountries ? allCountries.length : 0;
 
   const { searchQuery, sortByFilter, filterRegions, isUnMember } = useFilters();
 
-  useEffect(function () {
-    // if(searchQuery !== '') {
-    //   const newResults
-    // }
-  }, []);
+  useEffect(
+    function () {
+      console.log(searchQuery);
+      if (searchQuery !== '') {
+        const newResults = allCountries?.filter(
+          country =>
+            country?.name?.common
+              ?.toLowerCase()
+              .includes(searchQuery.toLowerCase()) ||
+            country?.region
+              ?.toLowerCase()
+              .includes(searchQuery.toLowerCase()) ||
+            country?.subregion
+              ?.toLowerCase()
+              .includes(searchQuery.toLowerCase())
+        );
+        if (newResults) setFilteredResults(newResults);
+        else setFilteredResults([]);
+      } else {
+        if (allCountries) setFilteredResults(allCountries);
+      }
+    },
+
+    [searchQuery, allCountries]
+  );
 
   return (
     <CountriesContext.Provider
