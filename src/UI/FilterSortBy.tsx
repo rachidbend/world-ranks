@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { FilterTitle } from './Filters';
 import { useState } from 'react';
+import { useFilters } from '../context/FiltersContext';
 
 const StyledFilterSortBy = styled.div`
   position: relative;
@@ -25,7 +26,7 @@ const SelectButton = styled.button`
 `;
 const DropDown = styled.ul`
   position: absolute;
-  top: 6rem;
+  top: 7rem;
   width: 100%;
   background-color: var(--color-grey-100);
   border: 0.2rem solid var(--color-grey-200);
@@ -43,7 +44,7 @@ const DropDownInput = styled.input`
   height: 0rem;
 `;
 const DropDownLabel = styled.label`
-  color: var(--color-grey-400);
+  color: var(--color-grey-300);
   font-family: var(--font-main);
   font-size: 1.4rem;
   text-transform: capitalize;
@@ -52,8 +53,11 @@ const DropDownLabel = styled.label`
   padding: 0.6rem;
   border-radius: 0.6rem;
   cursor: pointer;
+
+  transition: background 0.3s ease-out, color 0.3s ease-out;
   &:hover {
     background-color: var(--color-grey-300);
+    color: var(--color-grey-400);
   }
 `;
 
@@ -63,26 +67,20 @@ enum SoryByOptions {
   Area = 'AREA',
 }
 
+/**
+ * Filter component for sorting the results by:
+ * - population
+ * - name (alphabetical),
+ * - area
+ * @returns the filter sort by component
+ */
 function FilterSortBy() {
-  const [sortByFilter, setSortByFilter] = useState(SoryByOptions.Population);
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false);
 
-  function handleClick(option: string): void {
-    switch (option) {
-      case 'POPULATION':
-        setSortByFilter(SoryByOptions.Population);
-        break;
-      case 'NAME':
-        setSortByFilter(SoryByOptions.Name);
-        break;
-      case 'AREA':
-        setSortByFilter(SoryByOptions.Area);
-        break;
+  const { sortByFilter, handleSortBy } = useFilters();
 
-      default:
-        setSortByFilter(SoryByOptions.Population);
-        break;
-    }
+  function handleClick(option: string): void {
+    handleSortBy(option);
     setDropDownIsOpen(false);
   }
 

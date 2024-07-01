@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useGetAllCountries from '../hooks/useGetAllCountries';
 import { Countries } from '../helpers/helperTypes';
 import { createContext, useContext } from 'react';
+import { useFilters } from './FiltersContext';
 
 interface CountriesProps {
   children: React.ReactElement;
@@ -30,6 +31,14 @@ function CountriesProvider({ children }: CountriesProps) {
   const [filteredResults, setFilteredResults] = useState([]);
 
   const numOfResults = allCountries ? allCountries.length : 0;
+
+  const { searchQuery, sortByFilter, filterRegions, isUnMember } = useFilters();
+
+  useEffect(function () {
+    // if(searchQuery !== '') {
+    //   const newResults
+    // }
+  }, []);
 
   return (
     <CountriesContext.Provider

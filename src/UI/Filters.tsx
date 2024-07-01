@@ -1,7 +1,13 @@
 import styled from 'styled-components';
 import FilterSortBy from './FilterSortBy';
+import FilterRegion from './FilterRegion';
+import FilterStatus from './FilterStatus';
 
-const StyledFilters = styled.div``;
+const StyledFilters = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3.6rem;
+`;
 export const FilterTitle = styled.p`
   font-family: var(--font-main);
   font-size: 1.2rem;
@@ -10,16 +16,23 @@ export const FilterTitle = styled.p`
   margin-bottom: 1rem;
 `;
 
+/**
+ * Component that contains all filters other than search filter.
+ * The filters it contains are:
+ * - Sort by [population, name (alphabetical), area]
+ * - Region [americas, antarctic, africa, asia, europe, oceania]
+ * - Status [member of the UN, independent]
+ * @returns the components that contain each filter separately
+ */
 function Filters() {
   return (
     <StyledFilters>
       {/* Sort by */}
       <FilterSortBy />
       {/* Region */}
-
-      <p>Region</p>
+      <FilterRegion />
       {/* Status */}
-      <p>Status</p>
+      <FilterStatus />
     </StyledFilters>
   );
 }
