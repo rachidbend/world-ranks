@@ -9,7 +9,6 @@ interface CountriesProps {
 }
 
 interface CountriesContextType {
-  allCountries: Countries | undefined;
   isLoading: boolean;
   isError: boolean;
   filteredResults: Countries;
@@ -20,22 +19,54 @@ const CountriesContext = createContext<CountriesContextType | undefined>(
   undefined
 );
 
-function search(
-  searchQuery: string,
-  allCountries: Countries
-): Countries | undefined {
-  const newResults = allCountries?.filter(
-    country =>
-      country?.name?.common
-        ?.toLowerCase()
-        .includes(searchQuery.toLowerCase()) ||
-      country?.name?.official
-        ?.toLowerCase()
-        .includes(searchQuery.toLowerCase()) ||
-      country?.region?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      country?.subregion?.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-  if (newResults) return newResults;
+function search(searchQuery: string, allCountries: Countries): Countries {
+  if (allCountries) {
+    const newResults = allCountries?.filter(
+      country =>
+        country?.name?.common
+          ?.toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
+        country?.name?.official
+          ?.toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
+        country?.region?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        country?.subregion?.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    return newResults;
+  } else return allCountries;
+}
+
+function sortCountries(sortOrder: string, countries: Countries): Countries {
+  let sortedCountries: Countries = [];
+  if (sortOrder === 'POPULATION') {
+    sortedCountries = countries.sort((a, b) => {
+      return b.population - a.population;
+    });
+  } else if (sortOrder === 'NAME') {
+    sortedCountries = countries.sort((a, b) => {
+      const textA = a.name.common.toLowerCase();
+      const textB = b.name.common.toLowerCase();
+      return textA < textB ? -1 : textA > textB ? 1 : 0;
+    });
+  } else if (sortOrder === 'AREA') {
+    sortedCountries = countries.sort((a, b) => {
+      return b.area - a.area;
+    });
+  }
+  return sortedCountries;
+}
+
+function filterByRegion(
+  regions: string[],
+  allCountires: Countries | undefined
+): Countries {
+  if (allCountires) {
+    const results = allCountires.filter(country =>
+      regions.includes(country.region.toLowerCase())
+    );
+    return results;
+  } else return [];
 }
 
 /**
@@ -49,33 +80,41 @@ function CountriesProvider({ children }: CountriesProps) {
   const initialState: Countries = [];
   const [filteredResults, setFilteredResults] = useState(initialState);
 
-  const numOfResults = allCountries ? allCountries.length : 0;
-
   const { searchQuery, sortByFilter, filterRegions, isUnMember } = useFilters();
 
   useEffect(
     function () {
+      let filteredCountries: Countries = [];
+      if (filterRegions.length > 0) {
+        // get the countries filtered by region
+        filteredCountries = filterByRegion(filterRegions, allCountries);
+      }
+      if (filterRegions.length === 0) {
+        filteredCountries = allCountries ? allCountries : [];
+      }
+
+      // sort the filtered countries
+      const sortedCountries = sortCountries(sortByFilter, filteredCountries);
+
+      // apply any search query that the user types
       if (searchQuery) {
-        if (allCountries) {
-          const results = search(searchQuery, allCountries);
-          results ? setFilteredResults(results) : setFilteredResults([]);
-        }
+        const searchResults = search(searchQuery, sortedCountries);
+        setFilteredResults(searchResults);
       } else {
-        if (allCountries) setFilteredResults(allCountries);
+        setFilteredResults(sortedCountries);
       }
     },
 
-    [searchQuery, allCountries]
+    [searchQuery, sortByFilter, filterRegions, allCountries]
   );
 
   return (
     <CountriesContext.Provider
       value={{
-        allCountries,
         isError,
         isLoading,
         filteredResults,
-        numOfResults,
+        numOfResults: filteredResults.length,
       }}
     >
       {children}

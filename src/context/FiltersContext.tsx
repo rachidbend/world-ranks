@@ -47,6 +47,7 @@ function FiltersProvider({ children }: FilterProps) {
   const [filters, setFilters] = useState(initialState);
 
   function handleSortBy(option: string): void {
+    console.log(option);
     switch (option) {
       case 'POPULATION':
         setFilters({ ...filters, sortByFilter: SoryByOptions.Population });
@@ -75,14 +76,11 @@ function FiltersProvider({ children }: FilterProps) {
       );
 
       setFilters({ ...filters, filterRegions: newFilterRegions });
-    }
-    if (!filters.filterRegions.includes(region)) {
+    } else {
       setFilters({
         ...filters,
         filterRegions: [...filters.filterRegions, region],
       });
-    } else {
-      throw new Error('something went wrong with region filter');
     }
   }
 

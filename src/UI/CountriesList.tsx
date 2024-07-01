@@ -24,7 +24,7 @@ const List = styled.div`
 
 function CountriesList() {
   const { filteredResults, isError, isLoading } = useCountries();
-
+  console.log(filteredResults);
   if (isLoading) return <p>loading...</p>;
   if (isError) throw new Error('somethingwent wrong');
 
@@ -40,7 +40,10 @@ function CountriesList() {
       <List>
         {filteredResults
           ?.map(country => (
-            <CountryItem country={country} key={country.name.official} />
+            <CountryItem
+              country={country}
+              key={country.name.official.toUpperCase()}
+            />
           ))
           .slice(0, 10)}
       </List>
