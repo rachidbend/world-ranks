@@ -25,7 +25,7 @@ interface CountryItemProps {
 
 function CountryItem({ country }: CountryItemProps) {
   return (
-    <StyledCountryItem>
+    <StyledCountryItem key={country.name.official.toUpperCase()}>
       <Image src={country.flags.svg} alt={`flag of ${country.name.official}`} />
       <Text>{country.name.common}</Text>
       <Text>{country.population}</Text>

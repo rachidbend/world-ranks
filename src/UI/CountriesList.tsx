@@ -23,8 +23,8 @@ const List = styled.div`
 `;
 
 function CountriesList() {
-  const { allCountries, isError, isLoading } = useCountries();
-
+  const { filteredResults, isError, isLoading } = useCountries();
+  console.log(filteredResults);
   if (isLoading) return <p>loading...</p>;
   if (isError) throw new Error('somethingwent wrong');
 
@@ -38,11 +38,14 @@ function CountriesList() {
         <Title>region</Title>
       </Container>
       <List>
-        {allCountries
+        {filteredResults
           ?.map(country => (
-            <CountryItem country={country} key={country.name.official} />
+            <CountryItem
+              country={country}
+              key={country.name.official.toUpperCase()}
+            />
           ))
-          .slice(1, 10)}
+          .slice(0, 10)}
       </List>
     </StyledCountriesList>
   );

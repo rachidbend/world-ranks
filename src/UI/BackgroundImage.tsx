@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledBackground = styled.div`
-  background: url('/public/hero-image-wr.jpg');
+  background: url('/hero-image-wr.jpg');
   background-size: cover;
   background-position: center;
   height: 23.6rem;
@@ -19,7 +19,7 @@ function BackgroundImage() {
   return (
     <StyledBackground>
       {/* logo */}
-      <Logo src="/public/Logo.svg" alt="" />
+      <Logo src="/Logo.svg" alt="" />
     </StyledBackground>
   );
 }
