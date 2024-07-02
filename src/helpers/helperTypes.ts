@@ -1,4 +1,4 @@
-export type Contry = {
+export type Country = {
   name: {
     common: string;
     official: string;
@@ -84,4 +84,4 @@ export type Contry = {
   };
 };
 
-export type Countries = Contry[];
+export type Countries = Country[];
