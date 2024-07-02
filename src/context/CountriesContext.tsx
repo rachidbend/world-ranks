@@ -69,6 +69,16 @@ function filterByRegion(
   } else return [];
 }
 
+function filterByUnMemberShip(
+  isUnMember: boolean,
+  allCountries: Countries
+): Countries {
+  const result = allCountries.filter(
+    country => country.unMember === isUnMember
+  );
+  return result;
+}
+
 /**
  * Context to make getting countries data easier
  * @param children takes in any JSX
@@ -92,9 +102,12 @@ function CountriesProvider({ children }: CountriesProps) {
       if (filterRegions.length === 0) {
         filteredCountries = allCountries ? allCountries : [];
       }
-
+      const filterByUnStatus = filterByUnMemberShip(
+        isUnMember,
+        filteredCountries
+      );
       // sort the filtered countries
-      const sortedCountries = sortCountries(sortByFilter, filteredCountries);
+      const sortedCountries = sortCountries(sortByFilter, filterByUnStatus);
 
       // apply any search query that the user types
       if (searchQuery) {
@@ -105,7 +118,7 @@ function CountriesProvider({ children }: CountriesProps) {
       }
     },
 
-    [searchQuery, sortByFilter, filterRegions, allCountries]
+    [searchQuery, sortByFilter, filterRegions, isUnMember, allCountries]
   );
 
   return (
