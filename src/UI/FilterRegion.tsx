@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { FilterTitle } from './Filters';
-import { useState } from 'react';
 import { useFilters } from '../context/FiltersContext';
 
 const StyledFilterRegion = styled.div``;
