@@ -5,26 +5,26 @@ import BorderingCountry from './BorderingCountry';
 import { getCurrencies, getLanguages } from '../helpers/helperFunctions';
 
 const StyledCountryView = styled.div`
-  width: 76rem;
+  width: 72.2rem;
   border: 0.1rem solid var(--color-grey-200);
   margin: 0 auto;
   position: relative;
-  top: -5.2rem;
+  top: -5.6rem;
   background-color: var(--color-grey-100);
   border-radius: 1.2rem;
   font-family: var(--font-main);
   color: var(--color-grey-400);
-  padding-bottom: 4rem;
+  padding-bottom: 8.6rem;
 `;
 
 const FlagContainer = styled.div`
-  margin-top: -4rem;
+  margin-top: -4.6rem;
   display: flex;
   justify-content: center;
   margin-bottom: 2.4rem;
 `;
 const Flag = styled.img`
-  width: 24rem;
+  width: 26.4rem;
   height: auto;
   display: inline-block;
   border-radius: 1.2rem;
@@ -49,15 +49,15 @@ const OfficialName = styled.h3`
 const StatsContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap: 3.4rem;
+  gap: 3.8rem;
   align-items: center;
-  margin-bottom: 2.4rem;
+  margin-bottom: 3.8rem;
 `;
 const Stat = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.8rem;
+  padding: 0.8rem 0.9rem;
   background-color: var(--color-grey-200);
   border-radius: 0.8rem;
   gap: 1rem;
@@ -65,7 +65,7 @@ const Stat = styled.div`
 const StatText = styled.p`
   font-size: 1.2rem;
   font-weight: 500;
-  padding: 0.4rem;
+  padding: 0 0.5rem;
   letter-spacing: 0.06rem;
 `;
 const StatSeperator = styled.span`
@@ -108,7 +108,8 @@ const InfoValue = styled.p`
 
 const BorderingCountriesContainer = styled.div`
   display: flex;
-  gap: 2.4rem;
+  gap: 1.4rem;
+  row-gap: 2rem;
   padding: 0 1.8rem;
   flex-wrap: wrap;
 `;

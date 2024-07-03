@@ -5,7 +5,7 @@ const StyledBackground = styled.div`
   background: url('/hero-image-wr.jpg');
   background-size: cover;
   background-position: center;
-  height: 23.6rem;
+  height: 29.6rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +13,7 @@ const StyledBackground = styled.div`
 
 const LogoLink = styled(Link)`
   position: relative;
-  top: -1rem;
+  top: -2rem;
 `;
 
 const Logo = styled.img``;

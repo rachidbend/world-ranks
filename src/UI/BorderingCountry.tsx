@@ -6,13 +6,14 @@ const StyledBorderingCountry = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.8rem;
+
   text-decoration: none;
   /* align-items: center; */
 `;
 
 const Flag = styled.img`
-  width: 8rem;
+  width: 8.4rem;
   height: 6rem;
   border-radius: 0.6rem;
   overflow: hidden;
