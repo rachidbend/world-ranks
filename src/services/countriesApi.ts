@@ -33,4 +33,19 @@ async function getCountryData(name: string): Promise<Country> {
   return data[0];
 }
 
-export { getAllCountries, getCountryData };
+/**
+ * Fetcher function for getting a country's data by its code
+ * @param code a country code
+ * @returns the data of that country
+ */
+async function getCountryByCode(code: string): Promise<Countries> {
+  const res = await fetch(`https://restcountries.com/v3.1/alpha/${code}`);
+
+  if (!res.ok)
+    throw new Error('something went wrong getting the bordering  country!');
+  const data: Country[] = await res.json();
+  console.log(data);
+  return data;
+}
+
+export { getAllCountries, getCountryData, getCountryByCode };
