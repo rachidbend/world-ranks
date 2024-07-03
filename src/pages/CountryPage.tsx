@@ -1,24 +1,24 @@
 import styled from 'styled-components';
 import BackgroundImage from '../UI/BackgroundImage';
-import CountriesView from '../UI/CountriesView';
+import CountryView from '../UI/CountryView';
 
-const StyledHome = styled.div`
+const StyledCountryPage = styled.div`
   min-height: 100vh;
   min-height: 100svh;
 
   background-color: var(--color-grey-100);
 `;
 
-function Home() {
+function CountryPage() {
   return (
-    <StyledHome>
+    <StyledCountryPage>
       {/* background image */}
       <BackgroundImage />
 
-      {/* app component */}
-      <CountriesView />
-    </StyledHome>
+      {/* Country component */}
+      <CountryView />
+    </StyledCountryPage>
   );
 }
 
-export default Home;
+export default CountryPage;

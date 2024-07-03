@@ -68,6 +68,10 @@ function FiltersProvider({ children }: FilterProps) {
     }
   }
 
+  /**
+   * Handler for changing the selected regions filter, which only shows the countries that are in on of the regions selected
+   * @param region the region to be added to removed from the selected regions array
+   */
   function handleRegion(region: string): void {
     let newFilterRegions = [];
     if (filters.filterRegions.includes(region)) {

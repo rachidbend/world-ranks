@@ -1,4 +1,4 @@
-export type Contry = {
+export type Country = {
   name: {
     common: string;
     official: string;
@@ -17,6 +17,7 @@ export type Contry = {
   independent: true;
   status: string;
   unMember: true;
+  borders: string[];
   currencies: {
     [key: string]: {
       name: string;
@@ -84,4 +85,4 @@ export type Contry = {
   };
 };
 
-export type Countries = Contry[];
+export type Countries = Country[];

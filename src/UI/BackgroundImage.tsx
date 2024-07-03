@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledBackground = styled.div`
@@ -10,6 +11,11 @@ const StyledBackground = styled.div`
   align-items: center;
 `;
 
+const LogoLink = styled(Link)`
+  position: relative;
+  top: -1rem;
+`;
+
 const Logo = styled.img``;
 
 /**
@@ -19,7 +25,9 @@ function BackgroundImage() {
   return (
     <StyledBackground>
       {/* logo */}
-      <Logo src="/Logo.svg" alt="" />
+      <LogoLink to="/">
+        <Logo src="/Logo.svg" alt="World ranks logo" />
+      </LogoLink>
     </StyledBackground>
   );
 }

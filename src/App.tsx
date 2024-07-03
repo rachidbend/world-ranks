@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { GlobalStyle } from './helpers/variables.global';
 import CountriesProvider from './context/CountriesContext';
 import FiltersProvider from './context/FiltersContext';
+import CountryPage from './pages/CountryPage';
 
 const queryClient = new QueryClient();
 
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
     path: '/',
     element: <Home />,
     children: [],
+  },
+  {
+    path: '/country/:name',
+    element: <CountryPage />,
   },
 ]);
 
