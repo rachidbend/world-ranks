@@ -17,6 +17,7 @@ export type Country = {
   independent: true;
   status: string;
   unMember: true;
+  borders: string[];
   currencies: {
     [key: string]: {
       name: string;

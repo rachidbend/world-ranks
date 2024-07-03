@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import BackgroundImage from '../UI/BackgroundImage';
-import { useParams } from 'react-router-dom';
 import CountryView from '../UI/CountryView';
 
 const StyledCountryPage = styled.div`

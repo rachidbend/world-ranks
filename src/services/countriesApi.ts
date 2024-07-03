@@ -28,9 +28,9 @@ async function getCountryData(name: string): Promise<Country> {
 
   if (!res.ok)
     throw new Error('something went wrong getting the specified country!');
-  const data: Country = await res.json();
+  const data: Country[] = await res.json();
 
-  return data;
+  return data[0];
 }
 
 export { getAllCountries, getCountryData };
