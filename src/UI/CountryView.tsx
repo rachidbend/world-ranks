@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import useGetCountryData from '../hooks/useGetCountryData';
+import BorderingCountry from './BorderingCountry';
+import { getCurrencies, getLanguages } from '../helpers/helperFunctions';
 
 const StyledCountryView = styled.div`
   width: 60rem;
@@ -100,26 +102,6 @@ const InfoValue = styled.p`
   font-size: 500;
 `;
 
-function getLanguages(languages: { [key: string]: string }): string {
-  const entries = Object.entries(languages);
-  const allCountries = entries.map(langauge => langauge[1]);
-  const stringOfValues = allCountries.join(', ');
-
-  return stringOfValues;
-}
-
-function getCurrencies(currencies: {
-  [key: string]: {
-    name: string;
-    symbol: string;
-  };
-}): string {
-  const entries = Object.entries(currencies);
-  const allCountries = entries.map(currency => currency[1].name);
-  const stringOfValues = allCountries.join(', ');
-  return stringOfValues;
-}
-
 /**
  * Displays the data of a country
  * @returns
@@ -133,8 +115,6 @@ function CountryView() {
 
   if (isLoading) return <p>Loading data...</p>;
   if (isError) throw new Error('There was an error');
-
-  console.log(countryData?.borders);
 
   return (
     <StyledCountryView>
@@ -195,6 +175,12 @@ function CountryView() {
         </Info>
         <Info>
           <InfoTitle>Neighbouring Countries</InfoTitle>
+          {countryData?.borders.map(countryCode => (
+            <BorderingCountry
+              countryCode={countryCode}
+              key={`borderingCountry-${countryCode}`}
+            />
+          ))}
         </Info>
       </InfoContainer>
     </StyledCountryView>

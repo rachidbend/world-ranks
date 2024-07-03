@@ -28,7 +28,7 @@ async function getCountryData(name: string): Promise<Country> {
 
   if (!res.ok)
     throw new Error('something went wrong getting the specified country!');
-  const data: Country[] = await res.json();
+  const data: Countries = await res.json();
 
   return data[0];
 }
@@ -38,14 +38,14 @@ async function getCountryData(name: string): Promise<Country> {
  * @param code a country code
  * @returns the data of that country
  */
-async function getCountryByCode(code: string): Promise<Countries> {
+async function getCountryByCode(code: string): Promise<Country> {
   const res = await fetch(`https://restcountries.com/v3.1/alpha/${code}`);
 
   if (!res.ok)
     throw new Error('something went wrong getting the bordering  country!');
-  const data: Country[] = await res.json();
-  console.log(data);
-  return data;
+  const data: Countries = await res.json();
+
+  return data[0];
 }
 
 export { getAllCountries, getCountryData, getCountryByCode };
