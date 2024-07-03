@@ -5,15 +5,16 @@ import BorderingCountry from './BorderingCountry';
 import { getCurrencies, getLanguages } from '../helpers/helperFunctions';
 
 const StyledCountryView = styled.div`
-  width: 60rem;
+  width: 76rem;
   border: 0.1rem solid var(--color-grey-200);
   margin: 0 auto;
   position: relative;
-  top: -5rem;
+  top: -5.2rem;
   background-color: var(--color-grey-100);
   border-radius: 1.2rem;
   font-family: var(--font-main);
   color: var(--color-grey-400);
+  padding-bottom: 4rem;
 `;
 
 const FlagContainer = styled.div`
@@ -78,15 +79,18 @@ const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Info = styled.div`
+const Info = styled.div<{ $direction?: 'column' | 'row' }>`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  /* padding: 1.2rem; */
+  flex-direction: ${props =>
+    props.$direction === 'column' ? 'column' : 'row'};
+  justify-content: ${props =>
+    props.$direction === 'column' ? 'start' : 'space-between'};
+  align-items: ${props => (props.$direction === 'column' ? 'start' : 'center')};
+
   border-top: 0.1rem solid var(--color-grey-200);
 `;
 const InfoTitle = styled.p`
-  padding: 2rem 1.4rem;
+  padding: 2rem 1.8rem;
   letter-spacing: 0.05rem;
   color: var(--color-grey-300);
   text-transform: capitalize;
@@ -94,12 +98,19 @@ const InfoTitle = styled.p`
   font-size: 500;
 `;
 const InfoValue = styled.p`
-  padding: 2rem 1.4rem;
+  padding: 2rem 1.8rem;
   letter-spacing: 0.05rem;
   color: var(--color-grey-400);
   text-transform: capitalize;
   font-size: 1.2rem;
   font-size: 500;
+`;
+
+const BorderingCountriesContainer = styled.div`
+  display: flex;
+  gap: 2.4rem;
+  padding: 0 1.8rem;
+  flex-wrap: wrap;
 `;
 
 /**
@@ -113,7 +124,7 @@ function CountryView() {
     name ? name : ''
   );
 
-  if (isLoading) return <p>Loading data...</p>;
+  if (isLoading) return <StyledCountryView>Loading data...</StyledCountryView>;
   if (isError) throw new Error('There was an error');
 
   return (
@@ -173,14 +184,16 @@ function CountryView() {
           <InfoTitle>Continents</InfoTitle>
           <InfoValue>{countryData?.continents.join(', ')}</InfoValue>
         </Info>
-        <Info>
+        <Info $direction="column">
           <InfoTitle>Neighbouring Countries</InfoTitle>
-          {countryData?.borders.map(countryCode => (
-            <BorderingCountry
-              countryCode={countryCode}
-              key={`borderingCountry-${countryCode}`}
-            />
-          ))}
+          <BorderingCountriesContainer>
+            {countryData?.borders.map(countryCode => (
+              <BorderingCountry
+                countryCode={countryCode}
+                key={`borderingCountry-${countryCode}`}
+              />
+            ))}
+          </BorderingCountriesContainer>
         </Info>
       </InfoContainer>
     </StyledCountryView>

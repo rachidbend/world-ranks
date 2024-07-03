@@ -24,7 +24,7 @@ const List = styled.div`
 
 function CountriesList() {
   const { filteredResults, isError, isLoading } = useCountries();
-  console.log(filteredResults);
+
   if (isLoading) return <p>loading...</p>;
   if (isError) throw new Error('somethingwent wrong');
 
