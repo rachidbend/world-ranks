@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Contry } from '../helpers/helperTypes';
+import { Country } from '../helpers/helperTypes';
 import { Link } from 'react-router-dom';
 
 const StyledCountryItem = styled.div`
@@ -26,7 +26,7 @@ const StyledLink = styled(Link)`
 `;
 
 interface CountryItemProps {
-  country: Contry;
+  country: Country;
 }
 
 function CountryItem({ country }: CountryItemProps) {
